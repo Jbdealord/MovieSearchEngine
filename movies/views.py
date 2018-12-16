@@ -20,7 +20,7 @@ def movie_search(request):
     if query:
         result = tmdb.Search().movie(query=query)['results']
         movie_list = sorted(result, key=itemgetter('vote_average'),reverse = True)
-        pprint(movie_list)
+        # pprint(movie_list)
         # movie_list = 
 
     return render(request,'movies/home.html',
@@ -41,6 +41,9 @@ def movie_detail(request, id):
     # pprint(video)
     # pprint(images)
     # pprint(movie.credits())
+    # pprint(movie.credits()['cast'][:10])
+    # pprint(movie.credits()['crew'][:10])
+    
     movie_data = {
         "info": movie.info(), #Primary info
         "altname": movie.alternative_titles()['titles'], #Alternative titles
@@ -52,10 +55,11 @@ def movie_detail(request, id):
         "keywords": movie.keywords()['keywords'], #Plot keywords
         "year": movie.info()['release_date'][:4], #Release Information
         
-        "trailers": trailers, #Trailers
+        "trailer": trailers[:1], #Picking one Trailer from list
         
         "reviews": movie.reviews()['results'], #Reviews
     }
+    pprint(movie_data['trailer'])
 
     return render(request, "movies/details.html",
         {'movie_data': movie_data,
