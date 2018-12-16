@@ -1,0 +1,35 @@
+<title>Movie Search | {{ movie_data.info.title }}</title>
+{% include "movies/base.html" %}
+
+{% load mathfilters %}
+<head>
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<div class="container">
+
+    <div class="row">
+      <div class="col-sm-4" style="margin-top: 100px;">
+        <img class="img-responsive" style="width:300px" src='https://image.tmdb.org/t/p/w600_and_h900_bestv2{{ movie_data.info.poster_path }}'/>
+      </div>
+
+      <div class="col-sm-8" style="margin-top: 100px;">
+        <div class="well">
+          <h2>{{ movie_data.info.title }} ({{movie_data.year}})</h2>
+          <div class=" c100 p{{movie_data.info.vote_average|mul:10|floatformat:"0"}} small orange">
+            <span title="User Score">{{movie_data.info.vote_average|mul:10|floatformat:"0"}}%</span>
+              <div class="slice">
+                  <div class="bar"></div>
+                  <div class="fill"></div>
+              </div>
+
+          </div>
+        </div><h4>User<br>Score</h4><br><br>
+
+        <div class="well">
+          <h3>Overview</h3>
+          <p>{{ movie_data.info.overview }}</p>
+        </div>
+      </div>
+    </div>
+  </div>

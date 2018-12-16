@@ -1,0 +1,53 @@
+{% load static %}
+{% load mathfilters %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static "css/base.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "css/circle.css" %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <script href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+  </head>
+
+  <body>
+
+  <div id="container" class="{% if query|length > 0 %}view-results{% else %}view-initial{% endif %}">
+
+    <div id="banner-bkgrd">
+      <div id="banner-overlay" class="expand-vertical">
+        <h3 class="home"><a href="{% url 'movies:home' %}">Movie Search</a></h3>
+        <header id="search-container" class="flex-column flex-center">
+          <div id="search-heading">
+            <h1>Movie Search Engine</h1>
+          </div>
+          <form id="search-form" class="flex-inline" action={% url 'movies:home' %}>
+            <input id="search-input" type="text" name="query" placeholder="Search a movie" />
+            <input id="search-clear" type="button" tabindex="3" value="×">
+            <input id="search-btn" type="submit" tabindex="2" class="fa fa-search fa-lg" value="Search" title="Search" />
+          </form>
+        </header>
+        
+      </div> <!--/banner-overlay-->
+    </div> <!--/banner-->
+  
+
+  {% block content %}
+  {% endblock %}
+
+
+  </div> <!--id /container-->
+  
+
+      
+
+
+
+    <script type="text/javascript">
+      
+    </script>
+  </body>
+
+</html>

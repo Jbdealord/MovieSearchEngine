@@ -1,0 +1,51 @@
+{% extends "movies/base.html" %}
+{% load mathfilters %}
+{% block title %}Movie Search {% if query %}| {{query}} {% endif %} {% endblock %}
+
+
+{% block content %}
+
+{% if movie_list|length > 0 %}
+  <main id="results">
+        <div id="cards" class="flex-row flex-wrap">
+          {% for movie in movie_list %}
+                
+            <div class="card">
+              <div class="circle c100 p{{movie.vote_average|mul:10|floatformat:"0"}} small green">
+                    <span title="User Score">{{movie.vote_average|mul:10|floatformat:"0"}}%</span>
+                    <div class="slice">
+                        <div class="bar"></div>
+                        <div class="fill"></div>
+
+                    </div>
+
+                </div>
+              <div class="card-image">
+                <img src="{% if movie.poster_path %} https://image.tmdb.org/t/p/w600_and_h900_bestv2{{ movie.poster_path }} {% else %} https://www.movieinsider.com/images/none_175px.jpg {% endif %}" alt="{{ movie.title }}">
+
+                
+              </div>
+              <div class="card-title">
+                <h2>{{ movie.title }}</h2>
+
+              </div>
+              <div class="card-text">
+                <p align="justify">{{ movie.overview|truncatechars_html:100 }}</p>
+              </div>
+              <div class="card-actions">
+                
+                <a href="{% url 'movies:details' movie.id %}">MORE INFO</a>
+                
+              </div>
+            </div>
+
+          {% endfor %}
+        </div>
+      </main>
+  {% else %}
+  <main id="results">
+  <h3>No movie could be found! Please Try again..</h3>
+  </main>
+  {% endif %}
+
+{% endblock %}
